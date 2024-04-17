@@ -18,19 +18,23 @@ export default function Home() {
       } else {
         window.location.href = target_url + '?openExternalBrowser=1';
       }
-    }
-    if (useragt.match(/iphone|ipad|ipod/i)) {
-      // 아이폰은 강제로 사파리를 실행할 수 없다 ㅠㅠ
-      // 모바일 대응 뷰포트 강제 설정
-      const mobile = document.createElement('meta');
-      mobile.name = 'viewport';
-      mobile.content = 'width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui';
-      document.getElementsByTagName('head')[0].appendChild(mobile);
-    } else {
-      // 안드로이드는 Chrome이 설치되어있음으로 강제로 스킴 실행한다.
-      window.location.href =
-        'intent://' + target_url.replace(/https?:\/\//i, '') + '#Intent;scheme=http;package=com.android.chrome;end';
-    }
+    } else if (
+      useragt.match(
+        /inapp|naver|instagram|everytimeapp|whatsApp|iphone(.*)whale|android(.*)whale|kakaostory|band|twitter|DaumApps|DaumDevice\/mobile|FB_IAB|FB4A|FBAN|FBIOS|FBSS|SamsungBrowser\/[^1]/i
+      )
+    )
+      if (useragt.match(/iphone|ipad|ipod/i)) {
+        // 아이폰은 강제로 사파리를 실행할 수 없다 ㅠㅠ
+        // 모바일 대응 뷰포트 강제 설정
+        const mobile = document.createElement('meta');
+        mobile.name = 'viewport';
+        mobile.content = 'width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui';
+        document.getElementsByTagName('head')[0].appendChild(mobile);
+      } else {
+        // 안드로이드는 Chrome이 설치되어있음으로 강제로 스킴 실행한다.
+        window.location.href =
+          'intent://' + target_url.replace(/https?:\/\//i, '') + '#Intent;scheme=http;package=com.android.chrome;end';
+      }
   }, []);
 
   return (
