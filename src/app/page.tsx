@@ -1,3 +1,5 @@
+'use client';
+
 import styles from './page.module.css';
 import { Image, Button, Link } from '@nextui-org/react';
 import { useEffect } from 'react';
